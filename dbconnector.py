@@ -22,6 +22,7 @@ class MongoConnector(DBConnector):
 
     def filter(self, kwargs):
         items = list()
+
         if kwargs:
             cursor = self._collection.find(kwargs)
         else:
@@ -29,7 +30,6 @@ class MongoConnector(DBConnector):
         for item in cursor:
             item.pop("_id")
             items.append(item)
-
         return items
 
     def insert(self, kwargs):
