@@ -1,11 +1,16 @@
 from flask_restful import Resource
 from flask import request
+from dbconnector import *
 
 class Asset(Resource):
+    def __init__(self, *test):
+        super().__init__()
+        self._connector = MongoConnector(uri="mongodb://test:123456@ds261745.mlab.com:61745/p2pscale")
+
     def get(self):
-    	products = [{"id":1, "name":"Cocoa Pack A", "price" : 1000},
-    			{"id":2, "name":"Cocoa Pack B", "price" : 5000}]
-    	return {'response': 'ok', 'data' : products}
+        return self._connector.table.find(request.args)
+        #products = [{"id":1, "name":"Cocoa Pack A", "price" : 1000},{"id":2, "name":"Cocoa Pack B", "price" : 5000}]
+        #return {'response': 'ok', 'data' : products}
 
     def post(self):
     	all_data = request.get_json()
