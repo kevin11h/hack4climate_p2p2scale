@@ -37,14 +37,20 @@ user_data = {"name":"derta", "age":11}
 result = db.users.insert_one(user_data)
 print(result.inserted_id)
 
+result = db.users.insert_many(SEED_DATA)
 
-users = db.users.find({"no":11})
-print('\n User found from users Database \n')
+users = db.users.find()
+print('\n Users found from users Database \n')
 for user in users:
     print(user)
 
-users = db.users.find({'decade':'1970s'})
-print('\n All data from users Database \n')
-for user in users:
-    print(user)
+# users = db.users.find({"no":11})
+# print('\n User found from users Database \n')
+# for user in users:
+#     print(user)
+
+# users = db.users.find({'decade':'1970s'})
+# print('\n All data from users Database \n')
+# for user in users:
+#     print(user)
 
