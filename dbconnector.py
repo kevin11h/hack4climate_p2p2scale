@@ -29,8 +29,8 @@ class MongoConnector(DBConnector):
 
     def filter(self, **kwargs):
         items = list()
-        cursor = self._collection.find(kwargs)
+        cursor = self._collection.find(kwargs, { '_id'  :0 })
         for item in cursor:
-            items.append(item)
+            items.append(item)    
 
         return items
