@@ -1,4 +1,5 @@
 from flask_restful import Resource
+from flask import request
 
 class Asset(Resource):
     def get(self):
