@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 import pymongo
+from rfc3986 import urlparse
 
 
 class DBConnector(metaclass=ABCMeta):
@@ -18,9 +19,8 @@ class DBConnector(metaclass=ABCMeta):
 class MongoConnector(DBConnector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._connection = pymongo.MongoClient(host=kwargs.get('host'), port=kwargs.get('port') )
-        self._db = self._connection[kwargs.get('db')]
-        self._collection = self._db[kwargs.get('table')]
+        self._connection = pymongo.MongoClient(kwargs.get('uri'))
+
 
     def _initialize(self, **kwargs):
         pass
