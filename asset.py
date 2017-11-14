@@ -18,4 +18,4 @@ class Asset(Resource):
     def post(self):
         all_data = request.get_json()
         self._connector.insert(all_data)
-        return {'response': 'ok', 'data': all_data}
+        return {'response': 'ok'}

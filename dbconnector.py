@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 import pymongo
+from crypto import create_hash
 
 
 class DBConnector(metaclass=ABCMeta):
@@ -32,5 +33,17 @@ class MongoConnector(DBConnector):
         return items
 
     def insert(self, kwargs):
-        _, values = kwargs.popitem()
-        self._collection.insert_many(values)
+        if len(kwargs) == 1:
+            _, values = kwargs.popitem()
+            if len(values) == 1:
+                value = dict(_, values)
+                value["hash"] = create_hash(str(value))
+                self._collection.insert(value)
+            else:
+                for value in values:
+                    value["hash"] = create_hash(str(value))
+                self._collection.insert_many(values)
+        else:
+            kwargs["hash"] = create_hash(str(kwargs))
+            self._collection.insert(kwargs)
+
