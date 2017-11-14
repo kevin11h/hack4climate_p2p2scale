@@ -20,11 +20,17 @@ class MongoConnector(DBConnector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._connection = pymongo.MongoClient(kwargs.get('uri'))
-        self._db = self._connection.get_database(kwargs.get('db'))
+        self._db = self._connection[kwargs.get('db')]
+        self._db.authenticate(kwargs['username'], kwargs['password'])
         self._collection = self._db.get_collection(kwargs.get('table'))
 
     def _initialize(self, **kwargs):
         pass
 
     def filter(self, **kwargs):
-        return self._collection.find(**kwargs)
+        items = list()
+        cursor = self._collection.find(kwargs)
+        for item in cursor:
+            items.append(item)
+
+        return items
