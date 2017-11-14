@@ -32,6 +32,13 @@ SEED_DATA = [
 ]
 # connect to the students database and the ctec121 collection
 
+
 user_data = {"name":"derta", "age":11}
-result = db.restaurants.insert_one(user_data)
+result = db.users.insert_one(user_data)
 print(result.inserted_id)
+
+users = db.users.find()
+print('\n All data from users Database \n')
+for user in users:
+    print(user)
+
