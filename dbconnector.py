@@ -20,9 +20,8 @@ class MongoConnector(DBConnector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._connection = pymongo.MongoClient(kwargs.get('uri'))
-        self.db = self._connection.get_default_database()
-        self.table = self.db.get_collection("p2pscale")
-
+        self._db = self._connection.get_database(kwargs.get('db'))
+        self._collection = self._db.get_collection(kwargs.get('table'))
 
     def _initialize(self, **kwargs):
         pass
