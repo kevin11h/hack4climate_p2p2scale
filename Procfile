@@ -1,1 +1,1 @@
-web: python3 hack4climate.py
+web: python hack4climate.py
