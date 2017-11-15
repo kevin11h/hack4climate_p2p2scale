@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource
-
+from flask_restful.utils import cors
 
 from dbconnector import *
 
@@ -18,6 +18,7 @@ class Buyer(Resource):
                                               username="test",
                                               password="123456")
 
+    @cors.crossdomain(origin='*')
     def post(self):
         all_data = request.get_json()
         offers = all_data["hashes"]

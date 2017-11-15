@@ -1,5 +1,7 @@
 from flask_restful import Resource
 from flask import request
+from flask_restful.utils import cors
+
 from dbconnector import *
 
 
@@ -12,12 +14,14 @@ class Asset(Resource):
                                               username="test",
                                               password="123456")
 
+    @cors.crossdomain(origin='*')
     def get(self):
         parameters = dict()
         for key in request.args.keys():
             parameters[key] = request.args[key]
         return self._assetconnector.filter(parameters)
 
+    @cors.crossdomain(origin='*')
     def post(self):
         all_data = request.get_json()
         if len(all_data) == 1:

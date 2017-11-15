@@ -1,4 +1,6 @@
 from flask_restful import Resource
+from flask_restful.utils import cors
+
 from dbconnector import *
 from flask import request
 
@@ -10,6 +12,7 @@ class Seller(Resource):
                                               username="test",
                                               password="123456")
 
+    @cors.crossdomain(origin='*')
     def get(self):
         parameters = dict()
         for key in request.args.keys():
