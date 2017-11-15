@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from asset import Asset
 from seller import *
+import os
 
 
 
