@@ -1,11 +1,10 @@
 from flask_restful import Resource
 from flask import request
 from dbconnector import *
-from seller import Seller
 
 
 class Asset(Resource):
-    def __init__(self, *test):
+    def __init__(self):
         super().__init__()
         self._assetconnector = MongoConnector(uri="ds261745.mlab.com:61745", db="p2pscale", table="assets", username="test",
                                               password="123456")

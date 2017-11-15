@@ -1,9 +1,17 @@
 from flask_restful import Resource
+from dbconnector import *
 from flask import request
 
 
 class Seller(Resource):
+    def __init__(self):
+        super().__init__()
+        self._sellerconnector = MongoConnector(uri="ds261745.mlab.com:61745", db="p2pscale", table="sellers",
+                                              username="test",
+                                              password="123456")
+
     def get(self):
-        sellers = [{"id": 1, "name": "Seller Farmer A", "address": "Some place in Ivory Coast"},
-                   {"id": 2, "name": "Seller Farmer B", "address": "Some place near beach in Ivory Coast"}]
-        return {'response': 'ok', 'data': sellers}
+        parameters = dict()
+        for key in request.args.keys():
+            parameters[key] = request.args[key]
+        return self._sellerconnector.filter(parameters)
