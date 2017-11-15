@@ -1,1 +1,1 @@
-web: gunicorn app:hack4climate
+web: python3 hack4climate.py
