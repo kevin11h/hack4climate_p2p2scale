@@ -20,14 +20,11 @@ class Asset(Resource):
 
     def post(self):
         all_data = request.get_json()
-
         if len(all_data) == 1:
             _, values = all_data.popitem()
             self.store_multiple_records(values)
         else:
             self.store_single_multicolumn_record(all_data)
-
-
         return {'response': 'ok'}
 
     def store_single_multicolumn_record(self, all_data):
