@@ -47,3 +47,6 @@ class MongoConnector(DBConnector):
             kwargs["hash"] = create_hash(str(kwargs))
             self._collection.insert(kwargs)
 
+    def update(self, id, data):
+        self._collection.update_one(id, {"$set":data})
+
